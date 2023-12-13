@@ -1,0 +1,17 @@
+﻿@using PustokProject.ViewModels.Tags;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper MVCWebAppExample.TagHelpers.*, MVCWebAppExample
+@model VM_TagsUpdate
+
+
+<form class="flex card-body align-items-center" method="post" asp-action="UpdateTag">
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <label asp-for="Title" class="form-label">Title</label>
+        <input type="text" class="form-control" asp-for="Title">
+        <span asp-validation-for="Title" class="text-danger"></span>
+    
+
+    <button type="submit" class="btn btn-warning">Submit</button>
+
+</form>

@@ -1,0 +1,53 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper MVCWebAppExample.TagHelpers.*, MVCWebAppExample
+@using PustokProject.CoreModels
+@model PustokProject.ViewModels.BookImages.VM_BookImagesAddImage
+
+<form class="flex card-body align-items-center" method="post" enctype="multipart/form-data" asp-controller="BookImages" asp-action="AddImage" asp-route-bookId="@Model.BookId">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    
+    <input id="uploadimage" asp-for="ImageFile" type="file" accept="image/*"   />
+    <img id="img" width="300" height="300" src="https://subscription.tawseel.com/images/publications/NOT_AVAILABLE.png" />
+
+    <button type="submit" class="btn btn-warning">Upload Image</button>
+</form>
+
+
+<div class="card-body">
+    <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Image</th>
+                <th colspan="4">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (BookImage bookImage in Model.BookImages)
+            {
+                <tr style="color:@(bookImage.IsDeleted ? "white" : bookImage.IsMatchImagePath(Model.CoverImageUrl) ?  "white" : "black"); background-color:@(bookImage.IsDeleted ? "red" : bookImage.IsMatchImagePath(Model.CoverImageUrl) ?  "green" : ( bookImage.IsMatchImagePath(Model.BackImageUrl) ? "yellow" : string.Empty))" colspan="2">
+                    <td>@bookImage.Id</td>
+                    <th> <img width="100" height="50" src="~/bookimages/@bookImage.ImagePath"/> </th>
+                    <td><a style="display:@(bookImage.IsDeleted || bookImage.IsMatchImagePath(Model.CoverImageUrl) ? "none" : String.Empty);)" asp-area="Admin" asp-controller="BookImages" asp-action="SetAsCover" asp-route-Id="@Model.BookId" asp-route-imageName="@bookImage.ImagePath" `class="btn btn-success">Set As Cover</a></td>
+                    <td><a style="display:@(bookImage.IsDeleted || bookImage.IsMatchImagePath(Model.BackImageUrl) ? "none" : String.Empty);)" asp-area="Admin" asp-controller="BookImages" asp-action="SetAsBack" asp-route-Id="@Model.BookId" asp-route-imageName="@bookImage.ImagePath" `class="btn btn-success">Set As Back</a></td>
+                    <td><a style="display:@(bookImage.IsDeleted ? "none" : string.Empty);)" asp-area="Admin"  asp-controller="BookImages" asp-action="DeleteBookImage" asp-route-Id="@Model.BookId" asp-route-imageid="@bookImage.Id"  class="btn btn-danger">Delete</a></td>
+                    <td><a style="display:@(bookImage.IsDeleted ? String.Empty : "none");)" asp-area="Admin" asp-controller="BookImages" asp-action="RevokeDelete" asp-route-Id="@Model.BookId" asp-route-imageid="@bookImage.Id" `class="btn btn-primary">Revoke</a></td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+        var btnFile = document.getElementById("uploadimage");
+        var image = document.getElementById("img");
+
+        btnFile.onchange = evt => {
+            const [file] = btnFile.files
+            if (file) {
+                image.src = URL.createObjectURL(file)
+            }
+        }
+    </script>

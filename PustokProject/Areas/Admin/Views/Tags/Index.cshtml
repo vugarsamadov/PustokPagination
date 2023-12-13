@@ -1,0 +1,28 @@
+﻿@using PustokProject.CoreModels
+@using PustokProject.ViewModels
+@using PustokProject.ViewModels.Tags;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@model VM_PaginatedEntityTable<Tag>;
+
+@section scripts
+{
+    <script type="text/javascript">
+
+        $("#table-responsive").on("click", "#pagination a", function (ev) {
+            ev.preventDefault();
+            let url = $(this).attr('href');
+            fetch(url).then(a => a.text()).then(a => $("#table-responsive").html(a));
+        });
+    </script>
+}
+<div class="container-fluid">
+    <a asp-action="CreateTag" class="btn btn-success">Create</a>
+
+    <div class="card-body">
+        <div id="table-responsive"  class="table-responsive">
+            <partial name="_PaginatedColumnsTags"></partial>
+        </div>
+    </div>
+
+</div>

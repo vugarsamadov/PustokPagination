@@ -1,0 +1,76 @@
+﻿@using PustokProject.CoreModels
+@using PustokProject.ViewModels
+@model VM_PaginatedEntityTable<Tag>
+
+
+<div>
+    <ul id="pagination" class="pagination">
+        <li class='page-item @(Model.HasPrev ? "" : "disabled" )'>
+            <a class="page-link" href="@Model.PreviousPage" tabindex="-1">Previous</a>
+        </li>
+        @for (int i = 1; i <= Model.PageCount; i++)
+        {
+            @if (i == Model.CurrentPage)
+            {
+                <li class="page-item active">
+                    <a class="page-link" href="@Url.Action("PaginatedTags",new {pagenumber = i,take=3})">@i <span class="sr-only">(current)</span></a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item"><a class="page-link" href="@Url.Action("PaginatedTags",new {pagenumber = i,take=3})">@i</a></li>
+            }
+        }
+        <li class="page-item @(Model.HasNext ? "" : "disabled" )">
+            <a class="page-link" href="@Model.NextPage">Next</a>
+        </li>
+    </ul>
+</div>
+
+
+<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th colspan="3">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var tag in Model.Items)
+        {
+            <tr style="color:@(tag.IsDeleted ? "white" : "black"); background-color:@(tag.IsDeleted ? "red" : string.Empty)" colspan="2">
+                <td>@tag.Id</td>
+                <td>@tag.Title</td>
+                <td><a style="display:@(tag.IsDeleted ? "none" : string.Empty);)" asp-area="Admin" asp-controller="Tags" asp-action="UpdateTag" asp-route-id="@tag.Id" class="btn btn-warning">Edit</a></td>
+                <td><a style="display:@(tag.IsDeleted ? "none" : string.Empty);)" asp-area="Admin" asp-controller="Tags" asp-action="DeleteTag" asp-route-id="@tag.Id" class="btn btn-danger">Delete</a></td>
+                <td><a style="display:@(tag.IsDeleted ? string.Empty : "none" );)" asp-area="Admin" asp-action="RevokeDelete" asp-route-id="@tag.Id" class="btn btn-primary">Revoke</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<div>
+    <ul id="pagination" class="pagination">
+        <li class='page-item @(Model.HasPrev ? "" : "disabled" )'>
+            <a class="page-link" href="@Model.PreviousPage" tabindex="-1">Previous</a>
+        </li>
+        @for (int i = 1; i <= Model.PageCount; i++)
+        {
+            @if (i == Model.CurrentPage)
+            {
+                <li class="page-item active">
+                    <a class="page-link" href="@Url.Action("PaginatedTags",new {pagenumber = i,take=3})">@i <span class="sr-only">(current)</span></a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item"><a class="page-link" href="@Url.Action("PaginatedTags",new {pagenumber = i,take=3})">@i</a></li>
+            }
+        }
+        <li class="page-item @(Model.HasNext ? "" : "disabled" )">
+            <a class="page-link" href="@Model.NextPage">Next</a>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,22 @@
+﻿@using PustokProject.ViewModels.Categories;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper MVCWebAppExample.TagHelpers.*, MVCWebAppExample
+@model VM_UpdateCategory
+
+
+<form class="flex card-body align-items-center" method="post" asp-action="UpdateCategory">
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Name" class="form-label">Name</label>
+        <input type="text" class="form-control" asp-for="Name">
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <select class="form-control" asp-for="ParentId" asp-items="ViewBag.Categories">
+        <option value="">N/A</option>
+    </select>
+    
+    <button type="submit" class="btn btn-warning">Submit</button>
+
+</form>

@@ -1,0 +1,97 @@
+﻿@using PustokProject.ViewModels.Books;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper MVCWebAppExample.TagHelpers.*, MVCWebAppExample
+@model VM_UpdateBook
+
+
+<form class="flex card-body align-items-center" enctype="multipart/form-data" method="post" asp-action="UpdateBook">
+    
+    <div class="flex-row">
+        <img id="img" width="300" height="300" src="~/bookimages/@Model.CoverImageUrl" />
+        <img id="img" width="300" height="300" src="~/bookimages/@Model.BackImageUrl" />
+
+        @* <input id="updateimage" asp-for="ImageFile" type="file" accept="image/*" /> *@
+    </div>
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Name" class="form-label">Name</label>
+        <input type="text" class="form-control" asp-for="Name">
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <span asp-validation-for="Description" class="text-danger"></span>
+        <label asp-for="Description" class="form-label">Description</label>
+        <input type="text" class="form-control" asp-for="Description">
+    </div>
+
+    <div class="form-group">
+        <span asp-validation-for="Price" class="text-danger"></span>
+        <label asp-for="Price" class="form-label">Pricet</label>
+        <input type="text" class="form-control" asp-for="Price">
+    </div>
+    <div class="form-group">
+        <span asp-validation-for="DiscountPercentage" class="text-danger"></span>
+        <label asp-for="DiscountPercentage" class="form-label">DiscountPercentage</label>
+        <input type="text" class="form-control" asp-for="DiscountPercentage">
+    </div>  
+
+@*     <div class="form-group">
+        <span asp-validation-for="CoverImageUrl" class="text-danger"></span>
+        <label asp-for="CoverImageUrl" class="form-label">CoverImageUrlUrl</label>
+        <input type="text" class="form-control" asp-for="CoverImageUrl">
+    </div> *@
+    
+    <div class="form-group">
+        <span asp-validation-for="ProductCode" class="text-danger"></span>
+        <label asp-for="ProductCode" class="form-label">ProductCode</label>
+        <input type="text" class="form-control" asp-for="ProductCode">
+    </div>
+
+    @* <div class="form-group"> *@
+    @*     <div class="radio-container p-5"> *@
+    @* *@
+    @*         <div class="form-check"> *@
+    @*             <input asp-for="IsAvailable" value="0" class="form-check-input" type="radio" name="flexRadioDefault"> *@
+    @*             <label asp-for="IsAvailable" class="form-check-label"> *@
+    @*                 Available *@
+    @*             </label> *@
+    @*         </div> *@
+    @*         <div class="form-check"> *@
+    @*             <input asp-for="IsAvailable" value="1" class="form-check-input" type="radio" name="flexRadioDefault"> *@
+    @*             <label class="form-check-label" asp-for="IsAvailable"> *@
+    @*                 Not Available *@
+    @*             </label> *@
+    @*         </div> *@
+    @*         <span asp-validation-for="IsAvailable" class="text-danger"></span> *@
+    @*     </div> *@
+    @* </div> *@
+
+    <select class="form-control"  asp-for="CategoryId" asp-items="ViewBag.Categories"></select>
+    
+ <div class="form-group">
+            <span asp-validation-for="Authors" class="text-danger"></span>
+            <label asp-for="ProductCode" class="form-label">Authors</label>
+        <select class="form-control" asp-for="AuthorIds" asp-items="Model.Authors" >
+            <option disabled selected> Select Author</option>
+        </select>
+        </div>
+
+<button type="submit" class="btn btn-warning">Submit</button>
+    @* <script> *@
+    @* *@
+    @* *@
+    @* *@
+    @*     var btnFile = document.getElementById("updateimage"); *@
+    @*     var image = document.getElementById("img"); *@
+    @* *@
+    @*     btnFile.onchange = evt => { *@
+    @*         const [file] = btnFile.files *@
+    @*         if (file) { *@
+    @*             image.src = URL.createObjectURL(file) *@
+    @*         } *@
+    @*     } *@
+    @* *@
+    @* </script> *@
+</form>

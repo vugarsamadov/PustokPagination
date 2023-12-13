@@ -1,0 +1,45 @@
+﻿@using PustokProject.ViewModels.Sliders;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@model VM_SlidersIndex;
+
+<div class="container-fluid">
+    <a asp-action="Create" class="btn btn-success">Create</a>
+    
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Button Text</th>
+                        <th>Text position</th>
+                        <th>Thumbnail url</th>
+                        <th colspan="2">Action</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach(var slide in Model.Sliders)
+                    {
+                        <tr style="color:@(slide.IsDeleted ? "white" : "black"); background-color:@(slide.IsDeleted ? "red" : string.Empty)" colspan="2">
+                            <td>@slide.Id</td>
+                            <td>@slide.Title</td>
+                            <td>@slide.Description</td>
+                            <td>@slide.ButtonText</td>
+                            <td>@slide.TextPosition</td>
+                            <td>@slide.ThumpnailUrl</td>
+                            <td><a style="display:@(slide.IsDeleted ? "none" : string.Empty);)" asp-area="Admin" asp-action="UpdateSlider" asp-route-id="@slide.Id" class="btn btn-warning">Edit</a></td>
+                            <td><a style="display:@(slide.IsDeleted ? "none" : string.Empty);)" asp-area="Admin" asp-action="DeleteSlider" asp-route-id="@slide.Id" class="btn btn-danger">Delete</a></td>
+                            <td><a style="display:@(slide.IsDeleted ? string.Empty : "none" );)" asp-area="Admin" asp-action="RevokeDelete" asp-route-id="@slide.Id" class="btn btn-primary">Revoke</a></td>
+                            
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

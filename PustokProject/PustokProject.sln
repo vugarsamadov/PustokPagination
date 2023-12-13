@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34031.279
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PustokProject", "PustokProject.csproj", "{107E9570-CE77-413A-8605-5555E012298D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{107E9570-CE77-413A-8605-5555E012298D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{107E9570-CE77-413A-8605-5555E012298D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{107E9570-CE77-413A-8605-5555E012298D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{107E9570-CE77-413A-8605-5555E012298D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2F96A1F6-C665-4422-9491-D7EF9F940B7B}
+	EndGlobalSection
+EndGlobal

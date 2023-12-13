@@ -1,0 +1,95 @@
+﻿@using PustokProject.CoreModels
+@using PustokProject.ViewModels
+@model VM_PaginatedEntityTable<Book>
+
+<div >
+    <ul id="pagination" class="pagination" >
+        <li class='page-item @(Model.HasPrev ? "" : "disabled" )'>
+            <a class="page-link" href="@Model.PreviousPage" tabindex="-1">Previous</a>
+        </li>
+        @for (int i = 1; i <= Model.PageCount; i++)
+        {
+            @if (i == Model.CurrentPage)
+            {
+                <li class="page-item active">
+                    <a class="page-link" href="@Url.Action("PaginatedBooks",new {pagenumber = i,take=3})">@i <span class="sr-only">(current)</span></a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item"><a class="page-link" href="@Url.Action("PaginatedBooks",new {pagenumber = i,take=3})">@i</a></li>
+            }
+        }
+        <li class="page-item @(Model.HasNext ? "" : "disabled" )">
+            <a class="page-link" href="@Model.NextPage">Next</a>
+        </li>
+    </ul>
+</div>
+<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+<thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Cover Image</th>
+        <th>Back Image</th>
+        <th>Price</th>
+        <th>DiscountedPrice</th>
+        <th>ProductCode</th>
+        <th>IsAvailable</th>
+        <th>Authors</th>
+        <th>ProductCode</th>
+        <th>Category</th>
+        <th colspan="4">Action</th>
+    </tr>
+</thead>
+
+<tbody id="tablebody">
+@foreach (var book in Model.Items)
+{
+    <tr style="color:@(book.IsDeleted ? "white" : "black"); background-color:@(book.IsDeleted ? "red" : string.Empty)" colspan="2">
+        <td>@book.Id</td>
+        <td>@book.Name</td>
+        <td>@book.Description</td>
+        <th> <img width="100" height="50" src="~/bookimages/@book.CoverImageUrl" /> </th>
+        <th> <img width="100" height="50" src="~/bookimages/@book.BackImageUrl" /> </th>
+        <td>@book.Price</td>
+        <td>@book.DiscountedPrice</td>
+        <td>@book.ProductCode</td>
+        <td>@book.IsAvailable</td>
+
+        <td>@(string.Join(", ", book.BookAuthors.Select(a => a.Author.Name)))</td>
+        <td>@book.ProductCode</td>
+        <td>@book.Category.Name</td>
+        <td><a style="display:@(book.IsDeleted ? "none" : string.Empty);)" asp-area="Admin" asp-controller="Books" asp-action="UpdateBook" asp-route-id="@book.Id" class="btn btn-warning">Edit</a></td>
+        <td><a style="display:@(book.IsDeleted ? "none" : string.Empty);)" asp-area="Admin" asp-controller="BookImages" asp-action="Index" asp-route-Id="@book.Id" class="btn btn-warning">Edit Images</a></td>
+        <td><a style="display:@(book.IsDeleted ? "none" : string.Empty);)" asp-area="Admin" asp-controller="Books" asp-action="DeleteBook" asp-route-id="@book.Id" class="btn btn-danger">Delete</a></td>
+        <td><a style="display:@(book.IsDeleted ? string.Empty : "none" );)" asp-area="Admin" asp-action="RevokeDelete" asp-route-id="@book.Id" class="btn btn-primary">Revoke</a></td>
+    </tr>
+}
+</tbody>
+</table>
+<div>
+    <ul id="pagination" class="pagination">
+        <li class='page-item @(Model.HasPrev ? "" : "disabled" )'>
+            <a class="page-link" href="@Model.PreviousPage" tabindex="-1">Previous</a>
+        </li>
+        @for (int i = 1; i <= Model.PageCount; i++)
+        {
+            @if (i == Model.CurrentPage)
+            {
+                <li class="page-item active">
+                    <a class="page-link" href="@Url.Action("PaginatedBooks",new {pagenumber = i,take=3})">@i <span class="sr-only">(current)</span></a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item"><a class="page-link" href="@Url.Action("PaginatedBooks",new {pagenumber = i,take=3})">@i</a></li>
+            }
+        }
+        <li class="page-item @(Model.HasNext ? "" : "disabled" )">
+            <a class="page-link" href="@Model.NextPage">Next</a>
+        </li>
+    </ul>
+</div>
